@@ -1,6 +1,5 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { SiteVisionResponse } from './SiteVisionResponse';
+import { MessageService } from './message.service';
 
 @Component({
   selector: 'app-root',
@@ -8,21 +7,14 @@ import { SiteVisionResponse } from './SiteVisionResponse';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent implements OnInit {
-  title = 'prototyp';
+  messages:any;
 
-  constructor(private _http: HttpClient) {}
+  constructor(private service:MessageService) {}
 
-  public siteVisionResponse: SiteVisionResponse | undefined;
-
-  public ngOnInit(): void {
-    this._http
-      .get<SiteVisionResponse>(
-        'https://www.int14.csnnet.int/rest-api/1/1/4.23a46dfb173b37383332db4f/headless'
-      )
-      .subscribe({
-        next: (data: SiteVisionResponse) => {
-          this.siteVisionResponse = data;
-        },
+  ngOnInit() {
+    this.service.getMessages()
+      .subscribe(response => {
+        this.messages = response;
       });
   }
 }
