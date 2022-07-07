@@ -1,3 +1,11 @@
+<h1>
+  START
+</h1>
+
+<h2>
+  GET Objekt
+</h2>
+
 <div *ngFor="let message of messages">
   {{ message.id2 }} <br>
   {{ message.headline }} <br>
@@ -6,3 +14,36 @@
   <br>
 </div>
 
+<h2>
+  "POST" Objekt
+</h2>
+
+<form>
+  <div>
+    {{
+    {}
+    }}
+  </div>
+</form>
+
+<h3>
+  Skicka meddelande
+</h3>
+
+<form>
+  <label for="messageURL">Meddelande URL</label>
+  <br>
+  <input type="text" placeholder="Meddelande URL">
+  <br> <br>
+  <label for="startDate">Start Datum</label>
+  <br>
+  <input type="text" placeholder="Start Datum">
+  <br> <br>
+  <label for="endDate">Slut Datum</label>
+  <br>
+  <input type="text" placeholder="End Date">
+  <br> <br>
+  <button>
+    Skicka
+  </button>
+</form>
