@@ -1,12 +1,11 @@
 export interface SiteVisionResponse {
-  properties: {
+  /*properties: {
     shortId: number;
-  },
-  contentNodes: [
+  },*/
+  contentNodes: 
     {
       type: string;
       name: string;
       properties: { textContent: string };
-    }
-  ];
+    }[];
 }

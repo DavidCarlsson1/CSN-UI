@@ -1,19 +1,29 @@
-<div *ngFor="let post of posts">
-  {{ post.id2 }} <br>
-  {{ post.headline }} <br>
-  {{ post.text }}
-  <br>
-  <br>
-</div>
+<script type="text/typescript" src="app.component.ts"></script>
 
-<input 
-    (keyup.enter)="createPost(title)" #title
-    type="text" class="form-control">
-  
-<ul class="list-group">
-  <li 
-      *ngFor="let post of posts"
-      class="list-group-item">
-      {{ post.title }}
-  </li>
-</ul>
+<head></head>
+
+<body>
+  <div *ngFor="let post of posts">
+      {{ post.id2 }} <br>
+      {{ post.headline }} <br>
+      {{ post.text }}
+      <br>
+      <br>
+  </div>
+
+  <div id="appendDiv">
+  </div>
+
+  <h2>Lägg till artikel i api:et</h2>
+
+  <form #addMessage = "ngForm" (ngSubmit) = "createPost(addMessage.value)">
+    <label for="url">Länk:</label><br>
+    <input style="width: 30%" type="text" name="url" placeholder="URL:" ngModel><br><br>
+    <label for="startDate">Startdatum:</label><br>
+    <input type="date" name="startDate" placeholder="Startdatum" ngModel><br><br>
+    <label for="endDate">Slutdatum:</label><br>
+    <input type="date" name="endDate" placeholder="Slutdatum" ngModel><br><br>
+    <input type="submit" value="submit">
+  </form> 
+
+</body>

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { SiteVisionResponse } from './SiteVisionResponse';
-import { Post2 } from './post2';
+import { Post3 } from './post3';
 
   
 @Injectable({
@@ -9,7 +9,7 @@ import { Post2 } from './post2';
 })
 
 export class PostService {
-  private url = 'http://localhost:4200/admin/messages';
+  private url: string = 'http://localhost:4200/admin/messages';
 
    
   constructor(private httpClient: HttpClient) { }
@@ -18,7 +18,7 @@ export class PostService {
     return this.httpClient.get<SiteVisionResponse>(link);
   }
 
-  create(post: Post2) {
+  create(post: Post3) {
     return this.httpClient.post(this.url, JSON.stringify(post));
   }
   
