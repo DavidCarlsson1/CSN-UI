@@ -3,6 +3,7 @@
 <head></head>
 
 <body>
+<!--
   <div *ngFor="let post of posts">
       {{ post.id2 }} <br>
       {{ post.headline }} <br>
@@ -13,17 +14,67 @@
 
   <div id="appendDiv">
   </div>
+-->
+  <div>
 
-  <h2>Lägg till artikel i api:et</h2>
+    <img src="./assets/skärmbild1.png" width="100%">
 
-  <form #addMessage = "ngForm" (ngSubmit) = "createPost(addMessage.value)">
-    <label for="url">Länk:</label><br>
-    <input style="width: 30%" type="text" name="url" placeholder="URL:" ngModel><br><br>
-    <label for="startDate">Startdatum:</label><br>
-    <input type="date" name="startDate" placeholder="Startdatum" ngModel><br><br>
-    <label for="endDate">Slutdatum:</label><br>
-    <input type="date" name="endDate" placeholder="Slutdatum" ngModel><br><br>
-    <input type="submit" value="submit">
-  </form> 
+    <div style="width: 15%; float: left">
+      <img src="./assets/skärmbild2.png" height="100%" width="100%">
+    </div>
+
+    <div style="float: center; padding-left: 19%">
+      <h1 style="font-size: 250%">Redigering av API:er</h1>
+      <p>Här sker redigering av myndighetens API:er för kommunikation till externa hemsidor. Denna sida skulle kunna fyllas på med flera API:er, <br>
+        en sida för att visa innehållet samt en redigeringsfunktion för respektive API.</p>
+    </div>
+
+    <div style="float: center; padding-left: 28%; padding-top: 1%">
+      <h2 style="font-size: 200%">Lägg till artikel i api:et</h2>
+
+      <form style="float: center" #addMessage = "ngForm" (ngSubmit) = "createPost(addMessage.value)">
+        <csn-label for="url">Länk:</csn-label><br>
+        <csn-input>
+          <input
+            csnInputRef
+            [disableISO88591Validation]="true"
+            required
+            id="csnnummer"
+            name="url"
+            placeholder="URL:"
+            style="width: 30%"
+            type="text"
+            ngModel
+            ngModel
+          />
+       </csn-input>
+       <br>
+
+       <!--
+        <input style="width: 30%; font-size: 120%" type="text" name="url" placeholder="URL:" ngModel><br><br>
+       -->
+
+        
+        <csn-label for="startDate">Startdatum:</csn-label><br>
+        <input style="width: 20%; font-size: 120%" type="date" name="startDate" placeholder="Startdatum" ngModel><br><br>
+        <csn-label for="endDate">Slutdatum:</csn-label><br>
+        <input style="width: 20%; font-size: 120%" type="date" name="endDate" placeholder="Slutdatum" ngModel><br><br>
+
+        <csn-button
+          [isLoading]="false"
+          [ripple]="false"
+          [class]='"csnui-button-primary"'
+          [fullWidth]="false"
+          [center]="false"
+          [noShadow]="true"
+          [disabled]="false"
+          type="submit"
+          value="submit"
+
+        >Skicka</csn-button>
+
+      </form> 
+    </div>
+  </div>
 
 </body>

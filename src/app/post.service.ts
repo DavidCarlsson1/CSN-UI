@@ -11,15 +11,19 @@ import { Post3 } from './post3';
 export class PostService {
   private url: string = 'http://localhost:4200/admin/messages';
 
-   
   constructor(private httpClient: HttpClient) { }
   
-  getPosts(link: string){
+  getPosts(link: string) {
     return this.httpClient.get<SiteVisionResponse>(link);
   }
 
   create(post: Post3) {
-    return this.httpClient.post(this.url, JSON.stringify(post));
+    alert("hej");
+    alert(post);
+    this.httpClient.post<Post3>(this.url, post)
+        .subscribe(response => {
+        });
+    alert("hej2");
   }
   
 }

@@ -28,8 +28,12 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.scss"
+              "src/styles.scss",
+              "./node_modules/csn-komponentbibliotek/scss/csn.scss"
             ],
+            "stylePreprocessorOptions": {
+              "includePaths": ["./node_modules/csn-komponentbibliotek/scss"]
+            }, 
             "scripts": []
           },
           "configurations": {
