@@ -1,8 +1,57 @@
-<div *ngFor="let message of messages">
-  {{ message.id2 }} <br>
-  {{ message.headline }} <br>
-  {{ message.text }}
-  <br>
-  <br>
-</div>
+<script type="text/typescript" src="app.component.ts"></script>
 
+<head></head>
+
+<body>
+  <!--
+  <div *ngFor="let post of posts">
+      {{ post.id2 }} <br>
+      {{ post.headline }} <br>
+      {{ post.text }}
+      <br>
+      <br>
+  </div>
+
+  <div id="appendDiv">
+  </div>
+-->
+  <div>
+
+    <img src="./assets/skärmbild1.png" width="100%">
+
+    <div style="width: 15%; float: left">
+      <img src="./assets/skärmbild2.png" height="100%" width="100%">
+    </div>
+
+    <div style="float: center; padding-left: 19%">
+      <h1 style="font-size: 250%">Redigering av API:er</h1>
+      <p>Här sker redigering av myndighetens API:er för kommunikation till externa hemsidor. Denna sida skulle kunna
+        fyllas på med flera API:er, <br>
+        en sida för att visa innehållet samt en redigeringsfunktion för respektive API.</p>
+    </div>
+
+    <div style="float: center; padding-left: 28%; padding-top: 1%">
+      <h2 style="font-size: 200%">Lägg till artikel i api:et</h2>
+
+      <form #addMessage="ngForm" (ngSubmit)="createPost(addMessage.value)">
+        <csn-label for="url">Länk:</csn-label><br>
+
+        <csn-input>
+          <input csnInputRef [disableISO88591Validation]="true" required id="csnnummer" name="url" placeholder="URL:"
+            style="width: 30%" type="text" ngModel ngModel />
+        </csn-input>
+        <br>
+
+        <csn-label for="startDate">Startdatum:</csn-label><br>
+        <input style="width: 20%; font-size: 120%" type="date" name="startDate" placeholder="Startdatum"
+          ngModel><br><br>
+        <csn-label for="endDate">Slutdatum:</csn-label><br>
+        <input style="width: 20%; font-size: 120%" type="date" name="endDate" placeholder="Slutdatum" ngModel><br><br>
+
+        <csn-button [isLoading]="false" [ripple]="false" [class]='"csnui-button-primary"' [fullWidth]="false"
+          [center]="false" [noShadow]="true" [disabled]="false" type="submit" value="submit">Skicka</csn-button>
+
+      </form>
+    </div>
+  </div>
+</body>
