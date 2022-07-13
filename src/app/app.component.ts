@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { PostService } from './post.service';
-import { Post2 } from './post2';
+import { Post } from './post';
 import { SiteVisionResponse } from './SiteVisionResponse';
 import { HttpClient } from '@angular/common/http';
 
@@ -13,39 +13,94 @@ import { HttpClient } from '@angular/common/http';
 export class AppComponent implements OnInit {
   posts: any;
   title: any;
+  formdata: any;
+  post : Post = {
+    shortId: Number(''),
+    headline: '',
+    text: '',
+    hyperlink: '',
+    author: '',
+    startDate: '',
+    endDate: '',
+    publishingDate: ''
+  };
 
   constructor(private _http: HttpClient, private service: PostService) { }
 
-  public siteVisionResponse: SiteVisionResponse | undefined;
+  public siteVisionResponse: SiteVisionResponse;
+  
 
   ngOnInit() {
-    /*this.service.getPosts()        Skriv om startfunktionen senare
+    this.service.getPosts("http://localhost:4200/public/messages")        /*Skriv om startfunktionen senare*/
       .subscribe(response => {
         this.posts = response;
-      });*/
+      });
   }
 
-  createPost (input: HTMLInputElement) {
+  createPost(data: {url: string; startDate: string; endDate: string;}) {
 
-    this._http.get<SiteVisionResponse>(input.getAttribute("link")!)
+    this._http.get<SiteVisionResponse>(data.url)
       .subscribe({
-        next: (data: SiteVisionResponse) => {
-          this.siteVisionResponse = data;
-        },
-      });
+        next: (data1: SiteVisionResponse) => {
+          this.siteVisionResponse = data1;
 
-    var nodeList = Array.prototype.slice.call(this.siteVisionResponse?.contentNodes);
+          /*Omvandla publiceringsdatum och tilldela till det nya meddelandet*/
+          var date: Date = new Date(parseInt(this.siteVisionResponse.properties.publishDate));
+          var day = date.getDate();
+          if (day < 10) {
+            var zero = 0;
+            var day2 = ('' + zero + day).toString();
+          } else {
+            var day2 = day.toString();
+          }
+          var month = date.getMonth() + 1;
+          if (month < 10) {
+            var zero = 0;
+            var month2 = ('' + zero + month).toString();
+          } else {
+            var month2 = month.toString();
+          }
+          var date2 = (date.getFullYear() + '-').toString();
+          date2 = date2.concat(month2);
+          date2 = date2.concat("-");
+          date2 = date2.concat(day2);
+          this.post.publishingDate = date2;
 
-    let post3: Post2 = null!;
+          /*Plocka ut data från contentNodes och tilldela*/
+          const nodeList = this.siteVisionResponse.contentNodes;
+      
+          this.post.headline = nodeList[0]?.properties.textContent;
+          this.post.text = nodeList[1]?.properties.textContent;
 
-    post3.headline = nodeList[1].properties.textContent;
-    post3.text = nodeList[2].properties.textContent;
-    post3.startDate = input.getAttribute("startDate")!;
-    post3.endDate = input.getAttribute("endDate")!;
-    
-    this.service.create(post3)
-      .subscribe(response => {
-        this.posts = response;
-      });
+          /*Se till att texten fortfarande blir styckesindelad*/
+          for (let i=1; i<nodeList.length; i++) {
+            
+            if (nodeList[i+1]?.name.toString() == "Innehåll") {
+
+              var str1: string = "<br><br>";
+              var str2: string = nodeList[i+1]?.properties.textContent;
+
+              this.post.text = this.post.text.concat(str1.toString());
+              this.post.text = this.post.text.concat(str2.toString());    
+              
+            }
+          }
+
+          this.post.shortId = this.siteVisionResponse.properties.shortId;
+          var str3: string = "https://www.csn.se";
+          this.post.hyperlink = str3.concat(this.siteVisionResponse.properties.URI.toString());
+          this.post.author = this.siteVisionResponse.properties.publishedBy.properties.displayName;
+          this.post.startDate = data.startDate;
+          this.post.endDate = data.endDate;
+
+          /*
+          var innerHTML = ('<p>' + "headline: " + this.post.headline + '<br>' + "text: " + this.post.text + '<br>' + "startDate: " + this.post.startDate + '<br>' + "endDate: " + this.post.endDate + '</p>');
+          document.getElementById("appendDiv")?.append(innerHTML);
+          */
+          
+          this.service.create(this.post);
+          },
+      }); 
   }
 }
+
