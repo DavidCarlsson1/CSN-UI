@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { SiteVisionResponse } from './SiteVisionResponse';
-import { Post3 } from './post3';
+import { Post } from './post';
 
   
 @Injectable({
@@ -17,13 +17,14 @@ export class PostService {
     return this.httpClient.get<SiteVisionResponse>(link);
   }
 
-  create(post: Post3) {
-    alert("hej");
-    alert(post);
-    this.httpClient.post<Post3>(this.url, post)
+  create(post: Post) {
+
+    this.httpClient.post<Post>(this.url, post)
         .subscribe(response => {
         });
-    alert("hej2");
+        
+    alert("Ditt meddelande har lagts till.");
+
   }
   
 }
