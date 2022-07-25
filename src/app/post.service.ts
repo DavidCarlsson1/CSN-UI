@@ -9,7 +9,7 @@ import { Post } from './post';
 })
 
 export class PostService {
-  private url: string = 'http://localhost:4200/admin/messages';
+  private url: string = 'http://localhost:4201/admin/messages';
 
   constructor(private httpClient: HttpClient) { }
   

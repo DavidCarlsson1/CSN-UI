@@ -1,0 +1,51 @@
+#topNav {
+    height: 180px;
+    background-color: #3c1e5f;
+}
+
+#topNavContent {
+    position: relative;
+    margin: 0 auto;
+    width: 1600px;
+    padding-top: 45px;
+}
+
+#bottomNav {
+    height: 50px;
+    border-width: 0.5px;
+    border-color: #cdd1c7;
+    border-bottom-style: solid;
+}
+
+#bottomNavContent {
+    width: 1600px;
+    position: relative;
+    margin: 0 auto;
+}
+
+#bottomNavLeftContent {
+    float: left;
+    width: 500px;
+}
+
+#bottomNavRightContent {
+    float: right;
+    width: 500px;
+}
+
+#contentDiv {
+    width: 1600px;
+    position: relative;
+    margin: 0 auto;
+}
+
+#leftMenuDiv {
+    margin-top: 30px;
+    width: 300px;
+    float: left;
+}
+
+#rightContentDiv {
+    margin-top: 30px;
+    width: 1550px;
+}

@@ -30,7 +30,7 @@ export class AppComponent implements OnInit {
   public siteVisionResponse: SiteVisionResponse;
   
   ngOnInit() {
-    this.service.getPosts("http://localhost:4200/public/messages")        /*Skriv om startfunktionen senare*/
+    this.service.getPosts("http://localhost:4201/public/messages")        /*Skriv om startfunktionen senare*/
       .subscribe(response => {
         this.posts = response;
       });
