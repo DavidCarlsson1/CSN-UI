@@ -29,9 +29,8 @@ export class AppComponent implements OnInit {
 
   public siteVisionResponse: SiteVisionResponse;
   
-
   ngOnInit() {
-    this.service.getPosts("http://localhost:4200/public/messages")        /*Skriv om startfunktionen senare*/
+    this.service.getPosts("http://localhost:4201/public/messages")        /*Skriv om startfunktionen senare*/
       .subscribe(response => {
         this.posts = response;
       });
@@ -44,7 +43,7 @@ export class AppComponent implements OnInit {
         next: (data1: SiteVisionResponse) => {
           this.siteVisionResponse = data1;
 
-          /*Omvandla publiceringsdatum och tilldela till det nya meddelandet*/
+          /*Omvandla publiceringsdatum och tilldela det nya meddelandet*/
           var date: Date = new Date(parseInt(this.siteVisionResponse.properties.publishDate));
           var day = date.getDate();
           if (day < 10) {
@@ -69,12 +68,22 @@ export class AppComponent implements OnInit {
           /*Plocka ut data från contentNodes och tilldela*/
           const nodeList = this.siteVisionResponse.contentNodes;
       
-          this.post.headline = nodeList[0]?.properties.textContent;
-          this.post.text = nodeList[1]?.properties.textContent;
+          for (let i=0; i<nodeList.length-1; i++) {       
+            if (nodeList[i]?.name.toString() == "Rubrik") {
+             this.post.headline = nodeList[i]?.properties.textContent;
+             break;
+            }
+          }
+
+          for (let i=0; i<nodeList.length-1; i++) {       
+            if (nodeList[i]?.name.toString() == "Innehåll") {
+              this.post.text = nodeList[i]?.properties.textContent;
+              break;
+            }
+          }
 
           /*Se till att texten fortfarande blir styckesindelad*/
           for (let i=1; i<nodeList.length; i++) {
-            
             if (nodeList[i+1]?.name.toString() == "Innehåll") {
 
               var str1: string = "<br><br>";
