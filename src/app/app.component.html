@@ -1,8 +1,9 @@
-<div *ngFor="let message of messages">
-  {{ message.id2 }} <br>
-  {{ message.headline }} <br>
-  {{ message.text }}
-  <br>
-  <br>
+<div style= "display: inline-block; height: 200px; width: 300px; padding-bottom: 300px;">
+  <csn-form-field>
+    <csn-label>Datepicker</csn-label>
+    <csn-input>
+        <input csnInputRef type="CSN-date"/>
+    </csn-input>
+    <csn-hint-text>Välj ett datum</csn-hint-text>
+  </csn-form-field>
 </div>
-

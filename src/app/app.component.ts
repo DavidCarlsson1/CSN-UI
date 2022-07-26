@@ -9,6 +9,8 @@ import { MessageService } from './message.service';
 export class AppComponent implements OnInit {
   messages:any;
 
+  label: string = " HITTA";
+
   constructor(private service:MessageService) {}
 
   ngOnInit() {
