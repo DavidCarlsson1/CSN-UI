@@ -4,7 +4,6 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 
-
 import { AppComponent } from './app.component';
 import { CsnKomponentbibliotekModule} from 'csn-komponentbibliotek';
 
@@ -18,6 +17,6 @@ import { CsnKomponentbibliotekModule} from 'csn-komponentbibliotek';
     ReactiveFormsModule
   ],
   providers: [],
-  bootstrap: [AppComponent],
+  bootstrap: [AppComponent]
 })
 export class AppModule {}

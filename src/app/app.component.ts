@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { PostService } from './post.service';
 import { Post } from './post';
 import { SiteVisionResponse } from './SiteVisionResponse';
+import { ApiResponse } from './ApiResponse';
 import { HttpClient } from '@angular/common/http';
 
 @Component({
@@ -14,6 +15,8 @@ export class AppComponent implements OnInit {
   posts: any;
   title: any;
   formdata: any;
+  messages: any;
+  url: string = "http://localhost:4201/public/messages";
   post : Post = {
     shortId: Number(''),
     headline: '',
@@ -28,11 +31,14 @@ export class AppComponent implements OnInit {
   constructor(private _http: HttpClient, private service: PostService) { }
 
   public siteVisionResponse: SiteVisionResponse;
+  public apiResponse: ApiResponse | undefined;
   
   ngOnInit() {
-    this.service.getPosts("http://localhost:4201/public/messages")        /*Skriv om startfunktionen senare*/
-      .subscribe(response => {
-        this.posts = response;
+    this._http.get<ApiResponse>(this.url)
+      .subscribe({
+        next: (data: ApiResponse) => {
+          this.apiResponse = data;
+        }
       });
   }
 

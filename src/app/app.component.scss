@@ -1,13 +1,13 @@
 #topNav {
-    height: 180px;
+    height: 130px;
     background-color: #3c1e5f;
 }
 
 #topNavContent {
     position: relative;
     margin: 0 auto;
-    width: 1600px;
-    padding-top: 45px;
+    width: 1250px;
+    padding-top: 30px;
 }
 
 #bottomNav {
@@ -18,7 +18,7 @@
 }
 
 #bottomNavContent {
-    width: 1600px;
+    width: 1250px;
     position: relative;
     margin: 0 auto;
 }
@@ -34,18 +34,37 @@
 }
 
 #contentDiv {
-    width: 1600px;
+    width: 1250px;
     position: relative;
     margin: 0 auto;
 }
 
 #leftMenuDiv {
-    margin-top: 30px;
-    width: 300px;
+    margin-top: 20px;
+    width: 250px;
     float: left;
 }
 
 #rightContentDiv {
-    margin-top: 30px;
-    width: 1550px;
+    margin-top: 20px;
+    width: 1300px;
+}
+
+#cardDiv {
+    width: 1250px;
+    height: 2000px;
+}
+
+.card.text-center {
+    padding-left: 10px;
+    padding-right: 10px;
+    background-color: #f9f7f6;
+}
+
+.btn-primary {
+    background-color: #c1daf3 !important; 
+    color: #484a46 !important; 
+    border-style: none; 
+    font-weight: bold;
+    border-radius: 0 !important;
 }

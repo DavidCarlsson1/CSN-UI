@@ -29,7 +29,8 @@
             ],
             "styles": [
               "src/styles.scss",
-              "./node_modules/csn-komponentbibliotek/scss/csn.scss"
+              "./node_modules/csn-komponentbibliotek/scss/csn.scss",
+              "./node_modules/bootstrap/dist/css/bootstrap.min.css"
             ],
             "stylePreprocessorOptions": {
               "includePaths": ["./node_modules/csn-komponentbibliotek/scss"]
@@ -72,8 +73,7 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "proxyConfig": "src/proxy.conf.json",
-            "port": 4201
+            "proxyConfig": "src/proxy.conf.json"
           },
           "configurations": {
             "production": {

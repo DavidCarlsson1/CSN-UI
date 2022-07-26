@@ -3,7 +3,7 @@
 <head></head>
 
 <body>
-  <!--
+<!--
   <div *ngFor="let post of posts">
       {{ post.id2 }} <br>
       {{ post.headline }} <br>
@@ -24,12 +24,12 @@
   <div id="bottomNav">
     <div id="bottomNavContent">
       <div id="bottomNavLeftContent">
-        <p style="display: inline-block; cursor: pointer; font-size: 120%; margin-top: 13px;">Min startsida &nbsp; > &nbsp; </p>
-        <p style="display: inline-block; cursor: pointer; font-size: 120%; margin-top: 13px; color: #e4022d">Redigering av API:er</p>
+        <p style="display: inline-block; cursor: pointer; font-size: 100%; margin-top: 15px;">Min startsida &nbsp; > &nbsp; </p>
+        <p style="display: inline-block; cursor: pointer; font-size: 100%; margin-top: 15px; color: #e4022d">Redigering av API:er</p>
       </div>
 
       <div id="bottomNavRightContent">
-        <img src="./assets/csn_icons.png" height="55%" width="55%" style="cursor: pointer; float: right; padding-top: 13px;">
+        <img src="./assets/csn_icons.png" height="45%" width="45%" style="cursor: pointer; float: right; padding-top: 15px;">
       </div>
     </div>
   </div>
@@ -40,17 +40,18 @@
     </div>
     
     <div id="rightContentDiv">
-      <div style="padding-left: 355px; padding-top: 10px; width: 1250px;">
-        <h1 style="font-size: 300%; color: #404040">Redigering av API:er</h1>
-        <p style="font-size: 130%; color: #404040">Här sker redigering av myndighetens API:er för kommunikation till externa hemsidor. Denna sida är endast en prototyp 
-          men skulle senare kunna fyllas på med bl.a. flera API:er, en sida för att visa innehållet i API:erna, samt en redigeringsfunktion 
-          för respektive API.</p>
+      <div style="padding-left: 325px; padding-top: 10px; width: 1250px;">
+        <h1 style="font-size: 200%; color: #404040">Redigering av CSN:s information på Miuns hemsida</h1>
+        <p style="font-size: 110%; color: #404040">Här sker redigering av myndighetens API:er för kommunikation till externa hemsidor. Denna sida är 
+          endast en prototyp men skulle senare kunna fyllas på med bl.a. flera API:er, en sida för att visa innehållet i API:erna, samt en 
+          redigeringsfunktion för respektive API.<br>En artikel läggs till i API:et genom att hämta en "headless-länk" i Sitevision och infoga i 
+          formuläret nedan. Utöver det väljs också start- och slutdatum för när artikeln ska visas hos mottagaren.</p>
       </div>
 
-      <div style="float: left; padding-left: 120px; padding-top: 10px;">
-        <h2 style="font-size: 200%; color: #404040">Lägg till artikel i api:et</h2>
+      <div style="float: left; padding-left: 90px; padding-top: 10px;">
+        <h2 style="font-size: 150%; color: #404040">Lägg till artikel i API:et</h2>
 
-        <form #addMessage="ngForm" (ngSubmit)="createPost(addMessage.value)" style="font-size: 130%; width: 1000px; color: #404040">
+        <form #addMessage="ngForm" (ngSubmit)="createPost(addMessage.value)" style="font-size: 100%; width: 800px; color: #404040">
           <csn-label for="url">Länk:</csn-label><br>
 
           <csn-input>
@@ -69,6 +70,29 @@
             [center]="false" [noShadow]="true" [disabled]="false" type="submit" value="submit">Skicka</csn-button>
         </form>
       </div>
+
+      <div style="float: left; padding-left: 340px; padding-top: 40px;">
+        <h2 style="font-size: 150%; color: #404040">Innehåll i API:et</h2>
+
+        <div id="cardDiv">
+          <div *ngFor="let message of apiResponse?.messages">
+            <div class="card text-center shadow p-3 mb-5 bg-white rounded" style="margin-left: 10px; margin-right: 10px;">
+              <div class="card-body">
+                <div class="headlineDiv">
+                  <h5 class="card-title">{{ message.headline }}</h5>
+                </div>
+                <div class="textDiv">
+                  <p class="card-text">{{ message.text }}</p>
+                </div>
+                <div style="margin-top: 20px; margin-bottom: 10px">
+                  <a [href]="message.hyperlink" class="btn btn-primary">Länk till CSN</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
     </div>
   </div>
 </body>
