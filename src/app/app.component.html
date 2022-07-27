@@ -3,18 +3,7 @@
 <head></head>
 
 <body>
-<!--
-  <div *ngFor="let post of posts">
-      {{ post.id2 }} <br>
-      {{ post.headline }} <br>
-      {{ post.text }}
-      <br>
-      <br>
-  </div>
 
-  <div id="appendDiv">
-  </div>
--->
   <div id="topNav">
     <div id="topNavContent">
       <img src="./assets/csn_topnav.png" height="100%" width="100%" style="cursor: pointer;">
@@ -41,58 +30,145 @@
     
     <div id="rightContentDiv">
       <div style="padding-left: 325px; padding-top: 10px; width: 1250px;">
-        <h1 style="font-size: 200%; color: #404040">Redigering av CSN:s information på Miuns hemsida</h1>
+        <h1 style="font-size: 200%; color: #404040">Redigering av CSN:s information på Mittuniversitetets hemsida</h1>
         <p style="font-size: 110%; color: #404040">Här sker redigering av myndighetens API:er för kommunikation till externa hemsidor. Denna sida är 
           endast en prototyp men skulle senare kunna fyllas på med bl.a. flera API:er, en sida för att visa innehållet i API:erna, samt en 
           redigeringsfunktion för respektive API.<br>En artikel läggs till i API:et genom att hämta en "headless-länk" i Sitevision och infoga i 
           formuläret nedan. Utöver det väljs också start- och slutdatum för när artikeln ska visas hos mottagaren.</p>
       </div>
 
-      <div style="float: left; padding-left: 90px; padding-top: 10px;">
-        <h2 style="font-size: 150%; color: #404040">Lägg till artikel i API:et</h2>
+      <div style="float: left; padding-left: 90px; padding-top: 50px;">
+        <h2 style="font-size: 150%; color: #404040; padding-bottom: 20px;">Lägg till artikel i API:et</h2>
 
         <form #addMessage="ngForm" (ngSubmit)="createPost(addMessage.value)" style="font-size: 100%; width: 800px; color: #404040">
-          <csn-label for="url">Länk:</csn-label><br>
-
-          <csn-input>
-            <input csnInputRef [disableISO88591Validation]="true" required id="csnnummer" name="url" placeholder="URL:"
-              style="width: 30%" type="text" ngModel ngModel />
-          </csn-input>
+          
+          <div style= "display: inline-block; height: 6px; width: 30%; padding-bottom: 100px; padding-right: 20px; position: relative; top: -30px;">
+            <csn-label for="url">Länk</csn-label><br>
+            <csn-input>
+              <input csnInputRef [disableISO88591Validation]="true" required id="csnnummer" name="url" placeholder="URL:"
+                style="width: 100%" type="text" ngModel ngModel />
+            </csn-input>
+          </div>
+          
+          <div style= "display: inline-block; height: 6px; width: 30%; padding-bottom: 100px; padding-right: 20px;">
+            <csn-form-field>
+              <csn-label for="startDate">Startdatum</csn-label>
+              <csn-input>
+                  <input csnInputRef type="CSN-date" name="startDate" placeholder="Startdatum:" ngModel/>
+              </csn-input>
+            </csn-form-field>
+          </div>
+          
+          <div style= "display: inline-block; height: 6px; width: 30%; padding-bottom: 100px;">
+            <csn-form-field>
+              <csn-label for="endDate">Slutdatum</csn-label>
+              <csn-input>
+                  <input csnInputRef type="CSN-date" name="endDate" placeholder="Slutdatum:" ngModel/>
+              </csn-input>
+            </csn-form-field>
+          </div>
           <br>
-
-          <csn-label for="startDate">Startdatum:</csn-label><br>
-          <input style="width: 20%; font-size: 120%" type="date" name="startDate" placeholder="Startdatum"
-            ngModel><br><br>
-          <csn-label for="endDate">Slutdatum:</csn-label><br>
-          <input style="width: 20%; font-size: 120%" type="date" name="endDate" placeholder="Slutdatum" ngModel><br><br>
 
           <csn-button [isLoading]="false" [ripple]="false" [class]='"csnui-button-primary"' [fullWidth]="false"
             [center]="false" [noShadow]="true" [disabled]="false" type="submit" value="submit">Skicka</csn-button>
         </form>
       </div>
 
-      <div style="float: left; padding-left: 340px; padding-top: 40px;">
-        <h2 style="font-size: 150%; color: #404040">Innehåll i API:et</h2>
+      <div style="float: left; padding-left: 300px;">
+        <br><h2 style="font-size: 150%; color: #404040; padding-left: 40px; padding-bottom: 10px;">Innehåll i API:et</h2>
 
         <div id="cardDiv">
           <div *ngFor="let message of apiResponse?.messages">
-            <div class="card text-center shadow p-3 mb-5 bg-white rounded" style="margin-left: 10px; margin-right: 10px;">
+            <div class="card text-center shadow p-3 mb-5 bg-white rounded" style="margin-left: 10px; margin-right: 10px; margin-bottom: 20px !important; padding: 10px !important;">
               <div class="card-body">
                 <div class="headlineDiv">
-                  <h5 class="card-title">{{ message.headline }}</h5>
+                  <div class="center-vertically">
+                    <h5 class="card-title">{{ message.headline }}</h5>
+                  </div>
                 </div>
                 <div class="textDiv">
                   <p class="card-text">{{ message.text }}</p>
                 </div>
-                <div style="margin-top: 20px; margin-bottom: 10px">
-                  <a [href]="message.hyperlink" class="btn btn-primary">Länk till CSN</a>
+                <div style="margin-top: 10px;">
+                  <a (click)="open(editModal, message)" style="margin-right: 10px;" class="btn btn-warning">Redigera</a>
+                  <a (click)="removePost(message.id2)" style="margin-left: 10px;" class="btn btn-danger">Ta bort</a>
                 </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-
     </div>
   </div>
+
+  <!-- Modal for editing messages -->
+  <ng-template #editModal let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title" style="font-weight: bold" id="modal-basic-title">Redigera meddelande</h4>
+      <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+    </div>
+    <div class="modal-body">
+      <form #editForm="ngForm" (ngSubmit)="editPost()">
+        <div class="form-group distance-20">
+          <csn-label for="messageTitle">Titel</csn-label><br>
+          <csn-input>
+            <input csnInputRef [disableISO88591Validation]="true" name="messageTitle" placeholder="Titel:" id="messageTitle" #messageTitle style="width: 100%" type="text" ngModel />
+          </csn-input>
+        </div>
+        <div class="form-group distance-20">
+          <csn-label for="messageText">Text</csn-label><br>
+          <csn-input>
+            <input csnInputRef [disableISO88591Validation]="true" name="messageText" placeholder="Text:" style="width: 100%" type="text" ngModel />
+          </csn-input>
+        </div>
+        <div class="form-group distance-20">
+          <csn-label for="messageLink">Länk</csn-label><br>
+          <csn-input>
+            <input csnInputRef [disableISO88591Validation]="true" name="messageLink" placeholder="URL:" style="width: 100%" type="text" ngModel />
+          </csn-input>
+        </div>
+        <div class="form-group distance-20">
+          <csn-label for="messageAuthor">Författare</csn-label><br>
+          <csn-input>
+            <input csnInputRef [disableISO88591Validation]="true" name="messageAuthor" placeholder="Författare:" style="width: 100%" type="text" ngModel />
+          </csn-input>
+        </div>
+        <div class="form-group distance-20">
+          <csn-form-field>
+            <csn-label for="startDate">Startdatum</csn-label>
+            <csn-input>
+                <input csnInputRef type="CSN-date" name="messageStartDate" placeholder="Startdatum:" ngModel/>
+            </csn-input>
+          </csn-form-field>
+        </div>
+        <div class="form-group distance-20">
+          <csn-form-field>
+            <csn-label for="endDate">Slutdatum</csn-label>
+            <csn-input>
+                <input csnInputRef type="CSN-date" name="messageEndDate" placeholder="Slutdatum:" ngModel/>
+            </csn-input>
+          </csn-form-field>
+        </div>
+        <div class="form-group distance-20">
+          <csn-form-field>
+            <csn-label for="publishingDate">Publiceringsdatum</csn-label>
+            <csn-input>
+                <input csnInputRef type="CSN-date" name="messagePublishingDate" placeholder="Publiceringsdatum:" ngModel/>
+            </csn-input>
+          </csn-form-field>
+        </div>
+        <div class="form-group distance-20">
+          <csn-label for="messageLogo">Logotyp</csn-label><br>
+          <csn-input>
+            <input csnInputRef [disableISO88591Validation]="true" name="messageLogo" placeholder="Logo:" style="width: 100%" type="text" ngModel />
+          </csn-input>
+        </div>
+      </form>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-warning" (click)="modal.close('Save click')">Stäng</button>
+      <button type="button" class="btn btn-primary" type="submit" value="submit">Spara</button>
+    </div>
+  </ng-template>
+
 </body>

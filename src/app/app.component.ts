@@ -4,6 +4,8 @@ import { Post } from './post';
 import { SiteVisionResponse } from './SiteVisionResponse';
 import { ApiResponse } from './ApiResponse';
 import { HttpClient } from '@angular/common/http';
+import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
+import { FormControl, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-root',
@@ -14,8 +16,8 @@ import { HttpClient } from '@angular/common/http';
 export class AppComponent implements OnInit {
   posts: any;
   title: any;
-  formdata: any;
   messages: any;
+  closeResult: string;
   url: string = "http://localhost:4201/public/messages";
   post : Post = {
     shortId: Number(''),
@@ -28,7 +30,7 @@ export class AppComponent implements OnInit {
     publishingDate: ''
   };
 
-  constructor(private _http: HttpClient, private service: PostService) { }
+  constructor(private _http: HttpClient, private service: PostService, private modalService: NgbModal) { }
 
   public siteVisionResponse: SiteVisionResponse;
   public apiResponse: ApiResponse | undefined;
@@ -107,15 +109,45 @@ export class AppComponent implements OnInit {
           this.post.author = this.siteVisionResponse.properties.publishedBy.properties.displayName;
           this.post.startDate = data.startDate;
           this.post.endDate = data.endDate;
-
-          /*
-          var innerHTML = ('<p>' + "headline: " + this.post.headline + '<br>' + "text: " + this.post.text + '<br>' + "startDate: " + this.post.startDate + '<br>' + "endDate: " + this.post.endDate + '</p>');
-          document.getElementById("appendDiv")?.append(innerHTML);
-          */
           
           this.service.create(this.post);
           },
       }); 
+  }
+
+  removePost(id: number) {
+    var link: string;
+    link = ('http://localhost:4201/admin/messages/' + id).toString();
+    this._http.delete(link)
+      .subscribe(data => {
+        console.log(data);
+      });
+    alert("Meddelandet raderades");
+    window.location.reload();
+
+  }
+
+  editPost() {
+
+  }
+
+  open(content: any, message: any) {
+
+    this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
+      this.closeResult = `Closed with: ${result}`;
+    }, (reason) => {
+      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+    });
+  }
+  
+  private getDismissReason(reason: any): string {
+    if (reason === ModalDismissReasons.ESC) {
+      return 'by pressing ESC';
+    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
+      return 'by clicking on a backdrop';
+    } else {
+      return  `with: ${reason}`;
+    }
   }
 }
 

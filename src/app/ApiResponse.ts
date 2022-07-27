@@ -1,5 +1,6 @@
 export interface ApiResponse {
     messages: {
+        id2: number;
         shortId: number;
         headline: string;
         text: string;
