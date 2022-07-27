@@ -18,13 +18,11 @@ export class PostService {
   }
 
   create(post: Post) {
-
     this.httpClient.post<Post>(this.url, post)
         .subscribe(response => {
         });
         
     alert("Ditt meddelande har lagts till.");
-
+    window.location.reload();
   }
-  
 }
