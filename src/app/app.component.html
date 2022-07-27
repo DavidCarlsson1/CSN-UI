@@ -108,7 +108,7 @@
       <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
     </div>
     <div class="modal-body">
-      <form #editForm="ngForm" (ngSubmit)="editPost()">
+      <form #editForm="ngForm" (ngSubmit)="editPost(editForm.value)"> <!--Send the message object to editPost aswell-->
         <div class="form-group distance-20">
           <csn-label for="messageTitle">Titel</csn-label><br>
           <csn-input>
@@ -156,12 +156,6 @@
                 <input csnInputRef type="CSN-date" name="messagePublishingDate" placeholder="Publiceringsdatum:" ngModel/>
             </csn-input>
           </csn-form-field>
-        </div>
-        <div class="form-group distance-20">
-          <csn-label for="messageLogo">Logotyp</csn-label><br>
-          <csn-input>
-            <input csnInputRef [disableISO88591Validation]="true" name="messageLogo" placeholder="Logo:" style="width: 100%" type="text" ngModel />
-          </csn-input>
         </div>
       </form>
     </div>

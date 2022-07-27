@@ -127,9 +127,28 @@ export class AppComponent implements OnInit {
 
   }
 
-  editPost() {
+  /*
+  editPost(data: any, message: any) {
+    this.post.shortId = message.shortId;
+    this.post.headline = data.messageTitle;
+    this.post.text = data.messageText;
+    this.post.hyperlink = data.messageLink;
+    this.post.author = data.messageAuthor;
+    this.post.startDate = data.messageStartDate;
+    this.post.endDate = data.messageEndDate;
+    this.post.publishingDate = data.messagePublishingDate;
 
+    var url = ('http://localhost:4201/admin/messages/' + message.id2).toString();
+
+    this._http.put<Post>(url, this.post)
+      .subscribe(data => {
+        console.log(data);
+      });
   }
+*/
+
+editPost(data: any){}
+
 
   open(content: any, message: any) {
 
