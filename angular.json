@@ -28,8 +28,12 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.scss"
+              "src/styles.scss",
+              "./node_modules/csn-komponentbibliotek/scss/csn.scss"
             ],
+            "stylePreprocessorOptions": {
+              "includePaths": ["./node_modules/csn-komponentbibliotek/scss"]
+            }, 
             "scripts": []
           },
           "configurations": {
@@ -68,7 +72,8 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "proxyConfig": "src/proxy.conf.json"
+            "proxyConfig": "src/proxy.conf.json",
+            "port": 4201
           },
           "configurations": {
             "production": {
@@ -103,42 +108,23 @@
             ],
             "scripts": []
           }
-        }
-      }
-    },
-    "text-input": {
-      "projectType": "library",
-      "root": "projects/text-input",
-      "sourceRoot": "projects/text-input/src",
-      "prefix": "lib",
-      "architect": {
-        "build": {
-          "builder": "@angular-devkit/build-angular:ng-packagr",
-          "options": {
-            "project": "projects/text-input/ng-package.json"
-          },
-          "configurations": {
-            "production": {
-              "tsConfig": "projects/text-input/tsconfig.lib.prod.json"
-            },
-            "development": {
-              "tsConfig": "projects/text-input/tsconfig.lib.json"
-            }
-          },
-          "defaultConfiguration": "production"
         },
-        "test": {
-          "builder": "@angular-devkit/build-angular:karma",
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
           "options": {
-            "main": "projects/text-input/src/test.ts",
-            "tsConfig": "projects/text-input/tsconfig.spec.json",
-            "karmaConfig": "projects/text-input/karma.conf.js"
+            "lintFilePatterns": [
+              "src/**/*.ts",
+              "src/**/*.html"
+            ]
           }
         }
       }
     }
   },
   "cli": {
-    "analytics": false
+    "analytics": false,
+    "schematicCollections": [
+      "@angular-eslint/schematics"
+    ]
   }
 }

@@ -1,49 +1,101 @@
-<h1>
-  START
-</h1>
+<script type="text/typescript" src="app.component.ts"></script>
 
-<h2>
-  GET Objekt
-</h2>
+<head></head>
 
-<div *ngFor="let message of messages">
-  {{ message.id2 }} <br>
-  {{ message.headline }} <br>
-  {{ message.text }}
-  <br>
-  <br>
-</div>
-
-<h2>
-  "POST" Objekt
-</h2>
-
-<form>
-  <div>
-    {{
-    {}
-    }}
+<body>
+  <!--
+  <div *ngFor="let post of posts">
+      {{ post.id2 }} <br>
+      {{ post.headline }} <br>
+      {{ post.text }}
+      <br>
+      <br>
   </div>
-</form>
 
-<h3>
-  Skicka meddelande
-</h3>
+  <div id="appendDiv">
+  </div>
+-->
+  <div id="topNav">
+    <div id="topNavContent">
+      <img src="./assets/csn_topnav.png" height="100%" width="100%" style="cursor: pointer;">
+    </div>
+  </div>
 
-<form>
-  <label for="messageURL">Meddelande URL</label>
-  <br>
-  <input type="text" placeholder="Meddelande URL">
-  <br> <br>
-  <label for="startDate">Start Datum</label>
-  <br>
-  <input type="text" placeholder="Start Datum">
-  <br> <br>
-  <label for="endDate">Slut Datum</label>
-  <br>
-  <input type="text" placeholder="End Date">
-  <br> <br>
-  <button>
-    Skicka
-  </button>
-</form>
+  <div id="bottomNav">
+    <div id="bottomNavContent">
+      <div id="bottomNavLeftContent">
+        <p style="display: inline-block; cursor: pointer; font-size: 120%; margin-top: 13px;">Min startsida &nbsp; > &nbsp; </p>
+        <p style="display: inline-block; cursor: pointer; font-size: 120%; margin-top: 13px; color: #e4022d">Redigering av API:er</p>
+      </div>
+
+      <div id="bottomNavRightContent">
+        <img src="./assets/csn_icons.png" height="55%" width="55%" style="cursor: pointer; float: right; padding-top: 13px;">
+      </div>
+    </div>
+  </div>
+
+  <div id="contentDiv">
+    <div id="leftMenuDiv">
+      <img src="./assets/csn_leftmenu.png" height="100%" width="95%" style="cursor: pointer;">
+    </div>
+    
+    <div id="rightContentDiv">
+      <div style="padding-left: 355px; padding-top: 10px; width: 1250px;">
+        <h1 style="font-size: 300%; color: #404040">Redigering av API:er</h1>
+        <p style="font-size: 130%; color: #404040">Här sker redigering av myndighetens API:er för kommunikation till externa hemsidor. Denna sida är endast en prototyp 
+          men skulle senare kunna fyllas på med bl.a. flera API:er, en sida för att visa innehållet i API:erna, samt en redigeringsfunktion 
+          för respektive API.</p>
+      </div>
+
+      <div style="float: left; padding-left: 120px; padding-top: 10px;">
+        <h2 style="font-size: 200%; color: #404040">Lägg till artikel i api:et</h2>
+
+        <form #addMessage="ngForm" (ngSubmit)="createPost(addMessage.value)" style="font-size: 130%; width: 1000px; color: #404040">
+          <csn-label for="url">Länk:</csn-label><br>
+
+          <csn-input>
+            <input csnInputRef [disableISO88591Validation]="true" required id="csnnummer" name="url" placeholder="URL:"
+              style="width: 30%" type="text" ngModel ngModel />
+          </csn-input>
+          <br>
+
+          <div style= "display: inline-block; height: 6px; width: 30%; padding-bottom: 140px;">
+            <csn-form-field>
+              <csn-label for="endDate">Startdatum</csn-label>
+              <csn-input>
+                  <input csnInputRef type="CSN-date" name="startDate" placeholder="Startdatum" ngModel/>
+              </csn-input>
+              <csn-hint-text>Välj ett startdatum</csn-hint-text>
+            </csn-form-field>
+          </div>
+        <br>
+          <div style= "display: inline-block; height: 6px; width: 30%; padding-bottom: 140px;">
+            <csn-form-field>
+              <csn-label for="endDate">Slutdatum</csn-label>
+              <csn-input>
+                  <input csnInputRef type="CSN-date" name="endDate" placeholder="Slutdatum"ngModel/>
+              </csn-input>
+              <csn-hint-text for="endDate">Välj ett slutdatum</csn-hint-text>
+            </csn-form-field>
+          </div>
+          <br>
+
+          <div style ="height: 6px; width: 30%; padding-bottom: 140px;">
+          <csn-button 
+          [isLoading]="false" 
+          [ripple]="false" 
+          [class]='"csnui-button-primary"' 
+          [fullWidth]="false"
+          [center]="false" 
+          [noShadow]="true" 
+          [disabled]="false" 
+          type="submit" 
+          value="submit">Skicka</csn-button>
+        </div>
+        </form>
+      
+        
+      </div>
+    </div>
+  </div>
+</body>
