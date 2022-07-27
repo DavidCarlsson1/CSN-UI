@@ -83,7 +83,7 @@ export class AppComponent implements OnInit {
             }
           }
 
-          for (let i=0; i<nodeList.length-1; i++) {       
+          for (let i=0; i<nodeList.length; i++) {       
             if (nodeList[i]?.name.toString() == "Innehåll") {
               this.post.text = nodeList[i]?.properties.textContent;
               break;
