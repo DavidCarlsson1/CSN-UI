@@ -29,15 +29,14 @@
     </div>
     
     <div id="rightContentDiv">
-      <div style="padding-left: 325px; padding-top: 10px; width: 1250px;">
-        <h1 style="font-size: 200%; color: #404040">Redigering av CSN:s information på Mittuniversitetets hemsida</h1>
-        <p style="font-size: 110%; color: #404040">Här sker redigering av myndighetens API:er för kommunikation till externa hemsidor. Denna sida är 
-          endast en prototyp men skulle senare kunna fyllas på med bl.a. flera API:er, en sida för att visa innehållet i API:erna, samt en 
-          redigeringsfunktion för respektive API.<br>En artikel läggs till i API:et genom att hämta en "headless-länk" i Sitevision och infoga i 
-          formuläret nedan. Utöver det väljs också start- och slutdatum för när artikeln ska visas hos mottagaren.</p>
+      <div style="padding-left: 325px; padding-top: 40px; width: 1250px;">
+        <h1 style="font-size: 180%; color: #404040">Redigering av CSN:s information på Mittuniversitetets hemsida</h1>
+        <p style="font-size: 100%; color: #404040">Här sker redigering av myndighetens API:er för kommunikation till externa hemsidor. Denna sida är 
+          endast en prototyp men skulle senare kunna fyllas på med flera API:er och funktioner.<br>En artikel läggs till i API:et genom att hämta en 
+          "headless-länk" i Sitevision och infoga i formuläret nedan. Utöver det väljs också start- och slutdatum för när artikeln ska visas hos mottagaren.</p>
       </div>
 
-      <div style="float: left; padding-left: 90px; padding-top: 50px;">
+      <div style="float: left; padding-left: 90px; padding-top: 40px;">
         <h2 style="font-size: 150%; color: #404040; padding-bottom: 20px;">Lägg till artikel i API:et</h2>
 
         <form #addMessage="ngForm" (ngSubmit)="createPost(addMessage.value)" style="font-size: 100%; width: 800px; color: #404040">

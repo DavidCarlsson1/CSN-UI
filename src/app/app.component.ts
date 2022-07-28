@@ -124,7 +124,6 @@ export class AppComponent implements OnInit {
       });
     alert("Meddelandet raderades");
     window.location.reload();
-
   }
 
   /*
@@ -147,7 +146,7 @@ export class AppComponent implements OnInit {
   }
 */
 
-editPost(data: any){}
+  editPost(data: any){}
 
 
   open(content: any, message: any) {
