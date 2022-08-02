@@ -29,6 +29,17 @@ export class AppComponent implements OnInit {
     endDate: '',
     publishingDate: ''
   };
+  public fGroup = new FormGroup({
+    messageTitle: new FormControl(''),
+    messageText: new FormControl(''),
+    messageLink: new FormControl(''),
+    messageAuthor: new FormControl(''),
+    messageStartDate: new FormControl(''),
+    messageEndDate: new FormControl(''),
+    messagePublishingDate: new FormControl(''),
+    messageId: new FormControl(''),
+    messageShortId: new FormControl('')
+  });
 
   constructor(private _http: HttpClient, private service: PostService, private modalService: NgbModal) { }
 
@@ -90,7 +101,7 @@ export class AppComponent implements OnInit {
             }
           }
 
-          /*Se till att texten fortfarande blir styckesindelad*/
+          /*Se till att texten fortfarande blir styckesindelad*/ /*
           for (let i=1; i<nodeList.length; i++) {
             if (nodeList[i+1]?.name.toString() == "Innehåll") {
 
@@ -102,6 +113,8 @@ export class AppComponent implements OnInit {
               
             }
           }
+
+          */
 
           this.post.shortId = this.siteVisionResponse.properties.shortId;
           var str3: string = "https://www.csn.se";
@@ -124,33 +137,31 @@ export class AppComponent implements OnInit {
       });
     alert("Meddelandet raderades");
     window.location.reload();
-
   }
 
-  /*
-  editPost(data: any, message: any) {
-    this.post.shortId = message.shortId;
-    this.post.headline = data.messageTitle;
-    this.post.text = data.messageText;
-    this.post.hyperlink = data.messageLink;
-    this.post.author = data.messageAuthor;
-    this.post.startDate = data.messageStartDate;
-    this.post.endDate = data.messageEndDate;
-    this.post.publishingDate = data.messagePublishingDate;
+  
+  editPost(content: any) {  
+    this.post.shortId = Number(this.fGroup.controls.messageShortId.value);
+    this.post.headline = this.fGroup.controls.messageTitle.value;
+    this.post.text = this.fGroup.controls.messageText.value;
+    this.post.hyperlink = this.fGroup.controls.messageLink.value;
+    this.post.author = this.fGroup.controls.messageAuthor.value;
+    this.post.startDate = this.fGroup.controls.messageStartDate.value;
+    this.post.endDate = this.fGroup.controls.messageEndDate.value;
+    this.post.publishingDate = this.fGroup.controls.messagePublishingDate.value;
 
-    var url = ('http://localhost:4201/admin/messages/' + message.id2).toString();
+    var url = ('http://localhost:4201/admin/messages/' + Number(this.fGroup.controls.messageId.value)).toString();
 
     this._http.put<Post>(url, this.post)
       .subscribe(data => {
         console.log(data);
+        window.location.reload();
       });
   }
-*/
-
-editPost(data: any){}
-
 
   open(content: any, message: any) {
+  
+    this.fGroup.setValue({ messageTitle: message.headline, messageText: message.text, messageLink: message.hyperlink, messageAuthor: message.author, messageStartDate: message.startDate, messageEndDate: message.endDate, messagePublishingDate: message.publishingDate, messageId: message.id2, messageShortId: message.shortId });
 
     this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
       this.closeResult = `Closed with: ${result}`;
