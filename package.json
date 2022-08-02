@@ -24,7 +24,6 @@
     "@popperjs/core": "^2.10.2",
     "bluebird": "^3.7.2",
     "bootstrap": "^5.2.0",
-    "csn-internt-komponentbibliotek": "^2.4.0",
     "csn-komponentbibliotek": "^5.0.0",
     "moment": "^2.29.4",
     "ngx-bootstrap": "^9.0.0",
