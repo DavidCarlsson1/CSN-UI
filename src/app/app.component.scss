@@ -131,18 +131,12 @@
     padding-bottom: 20px;
 }
 
-/* Koden under är till för att försöka lägga kalendern framför modalen 
-
-.csnui-datepicker__wrapper {
-    z-index: 10000 !important;
-}
-
-.ng-tns-c140-11 {
-    z-index: 10000 !important;
+ngb-modal-window, ngb-modal-backdrop {
+    z-index: 1 !important;
+    --bs-modal-zindex: 1 !important;
 }
 
 .modal {
-    z-index: 10 !important;
+    --bs-modal-zindex: 1 !important;
 }
 
-*/

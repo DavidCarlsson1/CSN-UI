@@ -5,3 +5,8 @@
 
 /* Importing Bootstrap SCSS file. */
 @import '~bootstrap/scss/bootstrap';
+
+ngb-modal-window, ngb-modal-backdrop {
+    z-index: 1 !important;
+    --bs-modal-zindex: 1 !important;
+}

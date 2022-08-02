@@ -1,10 +1,10 @@
 export interface Post {
-    shortId: number;
-    headline: string;
-    text: string;
-    hyperlink: string;
-    author: string;
-    startDate: string;
-    endDate: string;
-    publishingDate : string;
+    shortId: number | null;
+    headline: string | null;
+    text: string | null;
+    hyperlink: string | null;
+    author: string | null;
+    startDate: string | null;
+    endDate: string | null;
+    publishingDate : string | null;
 }
