@@ -10,3 +10,8 @@ ngb-modal-window, ngb-modal-backdrop {
     z-index: 1 !important;
     --bs-modal-zindex: 1 !important;
 }
+
+csn-icon.csnui-select__icon-checkmark.csnui-select__icon-right.csnui-animation--popIn.ng-star-inserted {
+    display: none;
+    visibility: hidden;
+}

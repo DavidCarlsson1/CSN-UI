@@ -42,15 +42,37 @@
 
         <form #addMessage="ngForm" (ngSubmit)="createPost(addMessage.value)" style="font-size: 100%; width: 900px; color: #404040">
           
-          <div style= "display: inline-block; height: 6px; width: 26%; padding-bottom: 100px; padding-right: 20px; position: relative; top: -30px;">
+          <div style= "display: inline-block; height: 6px; width: 37%; padding-bottom: 65px; padding-right: 20px;">
             <csn-label for="url">Länk</csn-label><br>
             <csn-input>
               <input csnInputRef [disableISO88591Validation]="true" required id="csnnummer" name="url" placeholder="URL:"
                 style="width: 100%" type="text" ngModel ngModel />
             </csn-input>
           </div>
+
+          <div style= "display: inline-block; height: 6px; width: 37%; padding-bottom: 65px; padding-right: 20px; position: relative; top: -44px;">
+            <csn-form-field>
+              <csn-label for="targetGroup">Målgrupp</csn-label>
+              <csn-select>
+                <select csnInputRef name="targetGroup" ngModel>
+                  <option value="" disabled selected>Målgrupp:</option>
+                  <option value="Folkhögskola">Folkhögskola</option>
+                  <option value="Färdigutbildade låntagare">Färdigutbildade låntagare</option>
+                  <option value="Gymnasium">Gymnasium</option>
+                  <option value="Hemutrustningslån">Hemutrustningslån</option>
+                  <option value="Högstadie">Högstadie</option>
+                  <option value="Körkortslån">Körkortslån</option>
+                  <option value="Lågstadie">Lågstadie</option>
+                  <option value="Mellanstadie">Mellanstadie</option>
+                  <option value="Universitet">Universitet</option>
+                  <option value="Vuxenutbildning">Vuxenutbildning</option>
+                  <option value="Yrkesutbildning">Yrkesutbildning</option>
+                </select>
+              </csn-select>
+            </csn-form-field>
+          </div>
           
-          <div style= "display: inline-block; height: 6px; width: 37%; padding-bottom: 100px; padding-right: 20px;">
+          <div style= "display: inline-block; height: 6px; width: 37%; padding-bottom: 110px; padding-right: 20px;">
             <csn-form-field>
               <csn-label for="startDate">Startdatum</csn-label>
               <csn-input>
@@ -59,7 +81,7 @@
             </csn-form-field>
           </div>
           
-          <div style= "display: inline-block; height: 6px; width: 37%; padding-bottom: 100px;">
+          <div style= "display: inline-block; height: 6px; width: 37%; padding-bottom: 110px; padding-right: 20px;">
             <csn-form-field>
               <csn-label for="endDate">Slutdatum</csn-label>
               <csn-input>
@@ -74,7 +96,7 @@
         </form>
       </div>
 
-      <div style="float: left; padding-left: 300px;">
+      <div style="float: left; padding-left: 300px; padding-top: 50px;">
         <br><h2 style="font-size: 150%; color: #404040; padding-left: 40px; padding-bottom: 10px;">Innehåll i API:et</h2>
 
         <div id="cardDiv">
@@ -121,12 +143,6 @@
               <textarea csnInputRef [attr.maxlength]="250" placeholder="Text:" formControlName="messageText"  type="text"></textarea>
             </csn-textarea>
 
-          <!--
-          <csn-input>
-            <input csnInputRef [disableISO88591Validation]="true"  placeholder="Text:" formControlName="messageText" style="width: 100%" type="text" />
-          </csn-input>
-          -->
-
         </div>
         <div class="form-group distance-20">
           <csn-label for="messageLink">Länk</csn-label><br>
@@ -164,6 +180,31 @@
             </csn-input>
           </csn-form-field>
         </div>
+
+        <div class="form-group">
+          <csn-form-field>
+            <csn-label for="targetGroup">Målgrupp</csn-label>
+            <csn-select>
+              <select style="color: black !important;" formControlName="messageTargetGroup" csnInputRef>
+                <option value="" disabled selected >Målgrupp:</option>
+                <option value="Folkhögskola">Folkhögskola</option>
+                <option value="Färdigutbildade låntagare">Färdigutbildade låntagare</option>
+                <option value="Gymnasium">Gymnasium</option>
+                <option value="Hemutrustningslån">Hemutrustningslån</option>
+                <option value="Högstadie">Högstadie</option>
+                <option value="Körkortslån">Körkortslån</option>
+                <option value="Lågstadie">Lågstadie</option>
+                <option value="Mellanstadie">Mellanstadie</option>
+                <option value="Universitet">Universitet</option>
+                <option value="Vuxenutbildning">Vuxenutbildning</option>
+                <option value="Yrkesutbildning">Yrkesutbildning</option>
+              </select>
+            </csn-select>
+          </csn-form-field>
+        </div>
+
+        <!--Hidden values that are sent to handle the message in editPost()-->
+
         <div class="form-group">
           <csn-input>
             <input csnInputRef [disableISO88591Validation]="true" placeholder="Id2:" formControlName="messageId" style="width: 100%" type="text" type="hidden" />
@@ -174,6 +215,9 @@
             <input csnInputRef [disableISO88591Validation]="true" placeholder="shortId:" formControlName="messageShortId" style="width: 100%" type="text" type="hidden" />
           </csn-input>
         </div>
+
+        <!--Buttons to close or save-->
+        
         <div class="modal-footer">
           <button type="button" class="btn btn-warning" (click)="modal.close('Save click')">Stäng</button>
           <button class="btn btn-primary" type="submit">Spara</button>
