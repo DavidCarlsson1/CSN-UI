@@ -140,3 +140,15 @@ ngb-modal-window, ngb-modal-backdrop {
     --bs-modal-zindex: 1 !important;
 }
 
+select {
+    color: #757575;
+}
+
+select:focus {
+    color: black;
+}
+
+option {
+    color: black;
+}
+

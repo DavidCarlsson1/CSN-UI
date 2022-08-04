@@ -27,7 +27,8 @@ export class AppComponent implements OnInit {
     author: '',
     startDate: '',
     endDate: '',
-    publishingDate: ''
+    publishingDate: '',
+    targetGroup: ''
   };
   public fGroup = new FormGroup({
     messageTitle: new FormControl(''),
@@ -38,7 +39,8 @@ export class AppComponent implements OnInit {
     messageEndDate: new FormControl(''),
     messagePublishingDate: new FormControl(''),
     messageId: new FormControl(''),
-    messageShortId: new FormControl('')
+    messageShortId: new FormControl(''),
+    messageTargetGroup: new FormControl('')
   });
 
   constructor(private _http: HttpClient, private service: PostService, private modalService: NgbModal) { }
@@ -55,7 +57,7 @@ export class AppComponent implements OnInit {
       });
   }
 
-  createPost(data: {url: string; startDate: string; endDate: string;}) {
+  createPost(data: {url: string; targetGroup: string; startDate: string; endDate: string;}) {
 
     this._http.get<SiteVisionResponse>(data.url)
       .subscribe({
@@ -101,27 +103,13 @@ export class AppComponent implements OnInit {
             }
           }
 
-          /*Se till att texten fortfarande blir styckesindelad*/ /*
-          for (let i=1; i<nodeList.length; i++) {
-            if (nodeList[i+1]?.name.toString() == "Innehåll") {
-
-              var str1: string = "<br><br>";
-              var str2: string = nodeList[i+1]?.properties.textContent;
-
-              this.post.text = this.post.text.concat(str1.toString());
-              this.post.text = this.post.text.concat(str2.toString());    
-              
-            }
-          }
-
-          */
-
           this.post.shortId = this.siteVisionResponse.properties.shortId;
           var str3: string = "https://www.csn.se";
           this.post.hyperlink = str3.concat(this.siteVisionResponse.properties.URI.toString());
           this.post.author = this.siteVisionResponse.properties.publishedBy.properties.displayName;
           this.post.startDate = data.startDate;
           this.post.endDate = data.endDate;
+          this.post.targetGroup = data.targetGroup;
           
           this.service.create(this.post);
           },
@@ -149,19 +137,24 @@ export class AppComponent implements OnInit {
     this.post.startDate = this.fGroup.controls.messageStartDate.value;
     this.post.endDate = this.fGroup.controls.messageEndDate.value;
     this.post.publishingDate = this.fGroup.controls.messagePublishingDate.value;
+    this.post.targetGroup = this.fGroup.controls.messageTargetGroup.value;
 
     var url = ('http://localhost:4201/admin/messages/' + Number(this.fGroup.controls.messageId.value)).toString();
 
     this._http.put<Post>(url, this.post)
       .subscribe(data => {
         console.log(data);
+        alert("Meddelandet ändrades")
         window.location.reload();
       });
   }
 
   open(content: any, message: any) {
   
-    this.fGroup.setValue({ messageTitle: message.headline, messageText: message.text, messageLink: message.hyperlink, messageAuthor: message.author, messageStartDate: message.startDate, messageEndDate: message.endDate, messagePublishingDate: message.publishingDate, messageId: message.id2, messageShortId: message.shortId });
+    this.fGroup.setValue({ messageTitle: message.headline, messageText: message.text, messageLink: message.hyperlink, 
+      messageAuthor: message.author, messageStartDate: message.startDate, messageEndDate: message.endDate, 
+      messagePublishingDate: message.publishingDate, messageTargetGroup: message.targetGroup, messageId: message.id2, 
+      messageShortId: message.shortId });
 
     this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
       this.closeResult = `Closed with: ${result}`;
