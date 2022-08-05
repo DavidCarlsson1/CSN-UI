@@ -56,13 +56,25 @@
     font-weight: bold;
 }
 
+.btn-primary:hover {
+    background-color: #25123a !important;
+}
+
 .btn-warning {
     background-color: #fed164 !important;
     color: #404040 !important;
 }
 
+.btn-warning:hover {
+    background-color: #fec134 !important;
+}
+
 .btn-danger {
     background-color: #ee7c7d !important;
+}
+
+.btn-danger:hover {
+    background-color: #ea6163 !important;
 }
 
 .btn {

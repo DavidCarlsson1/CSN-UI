@@ -28,7 +28,7 @@ export class AppComponent implements OnInit {
     startDate: '',
     endDate: '',
     publishingDate: '',
-    targetGroup: ''
+    targetGroup: []
   };
   public fGroup = new FormGroup({
     messageTitle: new FormControl(''),
@@ -40,8 +40,12 @@ export class AppComponent implements OnInit {
     messagePublishingDate: new FormControl(''),
     messageId: new FormControl(''),
     messageShortId: new FormControl(''),
-    messageTargetGroup: new FormControl('')
+    messageTargetGroup: new FormControl([''])
   });
+  myData: string[] = ['Arbetslös', 'Basår', 'Folkhögskola', 'Gymnasiet', 'Hemutrustningslån', 'Högstadiet', 
+                      'Komvux', 'Körkortslån', 'Lågstadiet', 'Mellanstadiet', 'Universitet', 'Utlandsstudier',
+                      'Yrkeshögskola', 'Övriga utbildningar'];
+
 
   constructor(private _http: HttpClient, private service: PostService, private modalService: NgbModal) { }
 
@@ -57,14 +61,14 @@ export class AppComponent implements OnInit {
       });
   }
 
-  createPost(data: {url: string; targetGroup: string; startDate: string; endDate: string;}) {
+  createPost(data: {url: string; targetGroup: string[]; startDate: string; endDate: string;}) {
 
     this._http.get<SiteVisionResponse>(data.url)
       .subscribe({
         next: (data1: SiteVisionResponse) => {
           this.siteVisionResponse = data1;
 
-          /*Omvandla publiceringsdatum och tilldela det nya meddelandet*/
+
           var date: Date = new Date(parseInt(this.siteVisionResponse.properties.publishDate));
           var day = date.getDate();
           if (day < 10) {
@@ -86,7 +90,7 @@ export class AppComponent implements OnInit {
           date2 = date2.concat(day2);
           this.post.publishingDate = date2;
 
-          /*Plocka ut data från contentNodes och tilldela*/
+
           const nodeList = this.siteVisionResponse.contentNodes;
       
           for (let i=0; i<nodeList.length-1; i++) {       
