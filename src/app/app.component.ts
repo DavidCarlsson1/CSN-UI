@@ -42,9 +42,9 @@ export class AppComponent implements OnInit {
     messageShortId: new FormControl(''),
     messageTargetGroup: new FormControl([''])
   });
-  myData: string[] = ['Arbetslös', 'Basår', 'Folkhögskola', 'Gymnasiet', 'Hemutrustningslån', 'Högstadiet', 
-                      'Komvux', 'Körkortslån', 'Lågstadiet', 'Mellanstadiet', 'Universitet', 'Utlandsstudier',
-                      'Yrkeshögskola', 'Övriga utbildningar'];
+  myData: string[] = ['Arbetslös', 'Basår', 'Folkhögskola', 'Gymnasiet', 'Hemutrustningslån', 'Komvux', 
+                      'Körkortslån', 'Studerat färdigt', 'Universitet', 'Utlandsstudier', 'Yrkeshögskola', 
+                      'Övriga utbildningar'];
 
 
   constructor(private _http: HttpClient, private service: PostService, private modalService: NgbModal) { }
