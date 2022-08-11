@@ -7,5 +7,5 @@ export interface Post {
     startDate: string | null;
     endDate: string | null;
     publishingDate : string | null;
-    targetGroup: string | null;
+    targetGroup: string[] | null;
 }
