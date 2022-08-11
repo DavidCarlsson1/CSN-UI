@@ -33,16 +33,17 @@
       <div style="padding-left: 325px; padding-top: 40px; width: 1250px;">
         <h1 style="font-size: 180%; color: #404040">Redigering av CSN:s information på Mittuniversitetets hemsida</h1>
         <p style="font-size: 100%; color: #404040">Här sker redigering av myndighetens API:er för kommunikation till externa hemsidor. Denna sida är 
-          endast en prototyp men skulle senare kunna fyllas på med flera API:er och funktioner.<br>En artikel läggs till i API:et genom att hämta en 
-          "headless-länk" i Sitevision och infoga i formuläret nedan. Utöver det väljs också start- och slutdatum för när artikeln ska visas hos mottagaren.</p>
+          endast en prototyp men skulle senare kunna fyllas på med flera funktioner.<br>En artikel läggs till i API:et genom att hämta en 
+          "headless-länk" i Sitevision och infoga i formuläret nedan. Utöver det väljs också målgrupper samt start- och slutdatum för när artikeln 
+          ska visas hos mottagaren. Vilka målgrupper som väljs styr vilka API:er artikeln skickas till.</p>
       </div>
 
-      <div style="float: left; padding-left: 90px; padding-top: 40px;">
-        <h2 style="font-size: 150%; color: #404040; padding-bottom: 20px;">Lägg till artikel i API:et</h2>
+      <div style="float: left; padding-left: 90px; padding-top: 30px;">
+        <h2 style="font-size: 150%; color: #404040; padding-bottom: 10px;">Lägg till artikel i API:et</h2>
 
         <form #addMessage="ngForm" (ngSubmit)="createPost(addMessage.value)" style="font-size: 100%; width: 900px; color: #404040">
           
-          <div style= "display: inline-block; height: 6px; width: 37%; padding-bottom: 65px; padding-right: 20px;">
+          <div style= "display: inline-block; height: 6px; width: 37%; padding-bottom: 110px; padding-right: 20px;">
             <csn-label for="url">Länk</csn-label><br>
             <csn-input>
               <input csnInputRef [disableISO88591Validation]="true" required id="csnnummer" name="url" placeholder="URL:"
@@ -50,26 +51,14 @@
             </csn-input>
           </div>
 
-          <div style= "display: inline-block; height: 6px; width: 37%; padding-bottom: 65px; padding-right: 20px; position: relative; top: -44px;">
-            <csn-form-field>
-              <csn-label for="targetGroup">Målgrupp</csn-label>
-              <csn-select>
-                <select csnInputRef name="targetGroup" ngModel>
-                  <option value="" disabled selected>Målgrupp:</option>
-                  <option value="Folkhögskola">Folkhögskola</option>
-                  <option value="Färdigutbildade låntagare">Färdigutbildade låntagare</option>
-                  <option value="Gymnasium">Gymnasium</option>
-                  <option value="Hemutrustningslån">Hemutrustningslån</option>
-                  <option value="Högstadie">Högstadie</option>
-                  <option value="Körkortslån">Körkortslån</option>
-                  <option value="Lågstadie">Lågstadie</option>
-                  <option value="Mellanstadie">Mellanstadie</option>
-                  <option value="Universitet">Universitet</option>
-                  <option value="Vuxenutbildning">Vuxenutbildning</option>
-                  <option value="Yrkesutbildning">Yrkesutbildning</option>
-                </select>
-              </csn-select>
-            </csn-form-field>
+          <div style="display: inline-block; height: 5px; width: 37%; padding-bottom: 110px; padding-right: 20px; position: relative; top: 5px;">
+            <csn-label>Målgrupp</csn-label>
+            <mat-form-field appearance="outline" style= "width: 100%;">
+              <mat-label style="color: #757575;">Målgrupp:</mat-label>
+              <mat-select name="targetGroup" multiple style="background-color: white !important;" ngModel>
+                <mat-option *ngFor="let data of myData" [value]="data">{{data}}</mat-option>
+              </mat-select>
+            </mat-form-field>
           </div>
           
           <div style= "display: inline-block; height: 6px; width: 37%; padding-bottom: 110px; padding-right: 20px;">
@@ -93,10 +82,11 @@
 
           <csn-button [isLoading]="false" [ripple]="false" [class]='"csnui-button-primary"' [fullWidth]="false"
             [center]="false" [noShadow]="true" [disabled]="false" type="submit" value="submit">Skicka</csn-button>
+
         </form>
       </div>
 
-      <div style="float: left; padding-left: 300px; padding-top: 50px;">
+      <div style="float: left; padding-left: 300px; padding-top: 40px;">
         <br><h2 style="font-size: 150%; color: #404040; padding-left: 40px; padding-bottom: 10px;">Innehåll i API:et</h2>
 
         <div id="cardDiv">
@@ -182,25 +172,13 @@
         </div>
 
         <div class="form-group">
-          <csn-form-field>
-            <csn-label for="targetGroup">Målgrupp</csn-label>
-            <csn-select>
-              <select style="color: black !important;" formControlName="messageTargetGroup" csnInputRef>
-                <option value="" disabled selected >Målgrupp:</option>
-                <option value="Folkhögskola">Folkhögskola</option>
-                <option value="Färdigutbildade låntagare">Färdigutbildade låntagare</option>
-                <option value="Gymnasium">Gymnasium</option>
-                <option value="Hemutrustningslån">Hemutrustningslån</option>
-                <option value="Högstadie">Högstadie</option>
-                <option value="Körkortslån">Körkortslån</option>
-                <option value="Lågstadie">Lågstadie</option>
-                <option value="Mellanstadie">Mellanstadie</option>
-                <option value="Universitet">Universitet</option>
-                <option value="Vuxenutbildning">Vuxenutbildning</option>
-                <option value="Yrkesutbildning">Yrkesutbildning</option>
-              </select>
-            </csn-select>
-          </csn-form-field>
+          <csn-label>Målgrupp</csn-label>
+          <mat-form-field appearance="outline" style= "width: 100%;">
+            <mat-label style="color: #757575;">Målgrupp:</mat-label>
+            <mat-select formControlName="messageTargetGroup" multiple style="background-color: white !important;">
+              <mat-option class="targetValues" *ngFor="let data of myData" [value]="data">{{data}}</mat-option>
+            </mat-select>
+          </mat-form-field>
         </div>
 
         <!--Hidden values that are sent to handle the message in editPost()-->
@@ -219,8 +197,8 @@
         <!--Buttons to close or save-->
         
         <div class="modal-footer">
-          <button type="button" class="btn btn-warning" (click)="modal.close('Save click')">Stäng</button>
           <button class="btn btn-primary" type="submit">Spara</button>
+          <button type="button" class="btn btn-warning" (click)="modal.close('Save click')">Stäng</button>
         </div>
       </form>
     </div>

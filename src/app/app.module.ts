@@ -9,6 +9,10 @@ import { AppComponent } from './app.component';
 import { CsnKomponentbibliotekModule} from 'csn-komponentbibliotek';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
+import {MatSelectModule} from '@angular/material/select';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatInputModule} from '@angular/material/input';
+
 @NgModule({
   declarations: [AppComponent],
   imports: [
@@ -18,7 +22,11 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     FormsModule, 
     ReactiveFormsModule,
     BrowserAnimationsModule,
-    NgbModule
+    NgbModule,
+
+    MatSelectModule,
+    MatFormFieldModule,
+    MatInputModule
   ],
   providers: [],
   bootstrap: [AppComponent]
